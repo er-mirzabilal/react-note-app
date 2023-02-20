@@ -1,10 +1,10 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux";
 import { addNote, deleteNote, setSearchText } from "../../redux/noteSlice";
 
 import NoteList from "./NoteList";
-import NewNote from "./NewNote";
+import NewNote from "./DeleteMe";
 import { Box, Container, TextField, Typography } from "@mui/material";
 import AddNotes from "../addNotes";
 
@@ -14,7 +14,7 @@ const NotesApp: FC = () => {
   const searchText = useSelector((state: RootState) => state.notes.searchText);
 
   const handleAddNote = (text: string) => {
-    dispatch(addNote({ id: Date.now().toString(), text }));
+    // dispatch(addNote({ id: Date.now().toString(), text }));
   };
 
   const handleDeleteNote = (id: string) => {
@@ -26,6 +26,10 @@ const NotesApp: FC = () => {
   ) => {
     dispatch(setSearchText(event.target.value));
   };
+  
+  useEffect(()=> {
+    
+  },[])
 
   return (
     <Box sx={{ p: 2 }}>
@@ -46,7 +50,7 @@ const NotesApp: FC = () => {
             value={searchText}
             onChange={handleSearchTextChange}
           />
-          <AddNotes />
+          <AddNotes  />
         </Box>
         <NoteList
           notes={notes}

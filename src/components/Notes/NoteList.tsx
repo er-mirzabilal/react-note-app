@@ -1,7 +1,9 @@
 import { Box, MenuItem } from "@mui/material";
 import { FC } from "react";
 
-import { Note as NoteType } from "../../redux/noteSlice";
+import { NoteType } from "../../utiles/types";
+
+// import { Note as NoteType } from "../../redux/noteSlice";
 
 import Note from "./Note";
 
@@ -13,7 +15,7 @@ interface Props {
 
 const NoteList: FC<Props> = ({ notes, searchText, onDelete }) => {
   const filteredNotes = notes.filter((note) =>
-    note.text.toLowerCase().includes(searchText.toLowerCase())
+    note.title.toLowerCase().includes(searchText.toLowerCase())
   );
 
   return (
@@ -23,8 +25,8 @@ const NoteList: FC<Props> = ({ notes, searchText, onDelete }) => {
         margin: 2,
       }}
     >
-      {filteredNotes.map((note) => (
-        <MenuItem sx={{ background: "green", margin: 2,  }}>
+      {filteredNotes?.map((note) => (
+        <MenuItem sx={{ background: "green", margin: 2 }}>
           <Note key={note.id} note={note} onDelete={onDelete} />
         </MenuItem>
       ))}

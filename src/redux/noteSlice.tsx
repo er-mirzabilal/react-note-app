@@ -1,28 +1,33 @@
-
-
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { generateId } from "../utiles/common";
+import { NoteType } from "../utiles/types";
 
-export interface Note {
-  id: string;
-  text: string;
-}
-
-interface NotesState {
-  notes: Note[];
+export interface NotesState {
+  notes: NoteType[];
   searchText: string;
+  newNote: NoteType | null;
+  editMode: Boolean;
 }
 
 const initialState: NotesState = {
   notes: [],
   searchText: "",
+  newNote: null,
+  editMode: false,
 };
 
 const notesSlice = createSlice({
   name: "notes",
   initialState,
   reducers: {
-    addNote: (state, action: PayloadAction<Note>) => {
-      state.notes.push(action.payload);
+    addNote: (state, action: PayloadAction<NoteType>) => {
+      const { title, note } = action.payload;
+      const newNote = {
+        id: generateId(),
+        title,
+        note,
+      };
+      state.notes.push(newNote);
     },
     deleteNote: (state, action: PayloadAction<string>) => {
       state.notes = state.notes.filter((note) => note.id !== action.payload);
@@ -30,9 +35,13 @@ const notesSlice = createSlice({
     setSearchText: (state, action: PayloadAction<string>) => {
       state.searchText = action.payload;
     },
+    setNotes: (state, action: PayloadAction<NoteType[]>) => {
+      state.notes = action.payload;
+    },
   },
 });
 
-export const { addNote, deleteNote, setSearchText } = notesSlice.actions;
+export const { addNote, deleteNote, setSearchText, setNotes } =
+  notesSlice.actions;
 
 export default notesSlice.reducer;

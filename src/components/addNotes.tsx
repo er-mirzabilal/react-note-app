@@ -1,65 +1,3 @@
-// import { Add } from "@mui/icons-material";
-// import {
-//   Box,
-//   Button,
-//   Dialog,
-//   Divider,
-//   Grid,
-//   Modal,
-//   TextField,
-// } from "@mui/material";
-// import React, { useState } from "react";
-// import { useSelector, useDispatch } from "react-redux";
-// import { RootState } from "../redux";
-// import { addNote } from "../redux/noteSlice";
-// import { addNewItem } from "../redux/openModeSlice";
-// import NewNote from "./Notes/NewNote";
-
-// const AddNotes = () => {
-//   const dispatch = useDispatch();
-
-//   const [isModalOpen, setIsModalOpen] = useState(false);
-
-//   const handleAddNote = (text: string) => {
-//     dispatch(addNote({ id: Date.now().toString(), text }));
-//     setIsModalOpen(false);
-//   };
-
-//   return (
-//     <Box>
-//       <Button
-//         variant="contained"
-//         color="primary"
-//         onClick={() => setIsModalOpen(true)}
-//       >
-//         <Add />
-//       </Button>
-
-//       <Dialog
-//         keepMounted
-//         fullWidth
-//         open={isModalOpen}
-//         onClose={() => setIsModalOpen(false)}
-//         sx={{
-//           "& .MuiDialog-paper": {
-//             maxWidth: "770px !important",
-//             p: 3,
-
-//             boxShadow: "none",
-//             boxRadius: "none",
-//             margin: 1,
-//             width: "100%",
-//           },
-//         }}
-//       >
-//         <NewNote onAdd={handleAddNote} />
-//       </Dialog>
-//     </Box>
-//   );
-// };
-
-// export default AddNotes;
-
 import * as React from "react";
 import Button from "@mui/material/Button";
 import { styled } from "@mui/material/styles";
@@ -76,6 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Box } from "@mui/system";
 import { TextareaAutosize, TextField } from "@mui/material";
 import { RootState } from "../redux";
+import { generateId } from "../utiles/common";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -132,19 +71,25 @@ const NewNote = () => {
     setOpen(false);
   };
 
-  const [text, setText] = React.useState("");
+  const [title, setTitle] = React.useState("");
+  const [note, setNote] = React.useState("");
 
-  const handleAddNote = (text: string) => {
-    // dispatch(addNote({ id: Date.now().toString(), text }));
+  const handleAddNote = (title: string) => {
+    dispatch(addNote({ id: generateId(), title, note }));
   };
   const handleTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setText(event.target.value);
+    setTitle(event.target.value);
   };
-
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    handleAddNote(text);
-    setText("");
+  const handleNoteChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    console.log(event);
+    setNote(event.target.value);
+  };
+  const handleSubmit = () => {
+    // event.preventDefault();
+    dispatch(addNote({ id: generateId(), title, note }));
+    setTitle("");
+    setNote("");
+    setOpen(false);
   };
 
   return (
@@ -162,24 +107,23 @@ const NewNote = () => {
           onClose={handleClose}
         >
           <Box mb={2}>
-            <form onSubmit={handleSubmit}>
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  // background: "green",
-                }}
-              >
-                <Box>
-                  <TextField
-                    label="Title"
-                    fullWidth
-                    variant="outlined"
-                    value={text}
-                    onChange={handleTextChange}
-                  />
-                </Box>
-                {/* <Button
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                // background: "green",
+              }}
+            >
+              <Box>
+                <TextField
+                  label="Title"
+                  fullWidth
+                  variant="outlined"
+                  value={title}
+                  onChange={handleTextChange}
+                />
+              </Box>
+              {/* <Button
                   type="submit"
                   variant="contained"
                   color="primary"
@@ -187,20 +131,19 @@ const NewNote = () => {
                 >
                   <Add />
                 </Button> */}
-              </Box>
-            </form>
+            </Box>
           </Box>
         </BootstrapDialogTitle>
         <DialogContent dividers>
-          <TextareaAutosize style={{ width: 560 }} minRows={3} />
+          <TextareaAutosize
+            style={{ width: 560 }}
+            minRows={3}
+            value={note}
+            onChange={handleNoteChange}
+          />
         </DialogContent>
         <DialogActions>
-          <Button
-            autoFocus
-            disabled={!text}
-            type="submit"
-            onClick={handleClose}
-          >
+          <Button autoFocus disabled={!title} onClick={handleSubmit}>
             Save changes
           </Button>
         </DialogActions>

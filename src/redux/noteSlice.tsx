@@ -21,7 +21,6 @@ const notesSlice = createSlice({
   initialState,
   reducers: {
     addNote: (state, action: PayloadAction<NoteType>) => {
-      console.log(action.payload);
       state.notes.push(action.payload);
     },
     deleteNote: (state, action: PayloadAction<string>) => {

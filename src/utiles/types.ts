@@ -3,3 +3,8 @@ export interface NoteType {
   title: string;
   note: string;
 }
+
+export interface NoteErrorType {
+  title?: string;
+  note?: string;
+}

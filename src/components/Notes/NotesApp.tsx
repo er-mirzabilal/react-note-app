@@ -65,8 +65,17 @@ const NotesApp: FC = () => {
     setEditMode(true);
   };
   return (
-    <Box sx={{ p: 2 }}>
-      <Container maxWidth="sm">
+    <Box
+      sx={{
+        p: 2,
+        width: "300px",
+        background: "#455a64",
+        color: "white",
+        alignItems: "center",
+        height: "96.4vh",
+      }}
+    >
+      <>
         <Box mt={4} mb={2}>
           <Typography variant="h4" align="center">
             Notes
@@ -101,7 +110,7 @@ const NotesApp: FC = () => {
           onDelete={handleDeleteNote}
           onClick={handleUpdateNote}
         />
-      </Container>
+      </>
     </Box>
   );
 };

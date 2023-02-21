@@ -12,7 +12,7 @@ import { Add } from "@mui/icons-material";
 import { addNote, NotesState } from "../redux/noteSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { Box } from "@mui/system";
-import { TextareaAutosize, TextField } from "@mui/material";
+import { Modal, TextareaAutosize, TextField } from "@mui/material";
 import { RootState } from "../redux";
 import { generateId } from "../utiles/common";
 import { NoteType } from "../utiles/types";
@@ -21,9 +21,11 @@ import { noteValidation } from "../utiles/validation";
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
     padding: theme.spacing(2),
+    background: "red",
   },
   "& .MuiDialogActions-root": {
     padding: theme.spacing(1),
+    background: "green      ",
   },
 }));
 
@@ -93,47 +95,77 @@ const NoteViewer = ({
         console.log(err);
       });
   };
+  const style = {
+    position: "absolute" as "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: 900,
+    height: 860,
+    bgcolor: "#90a4ae",
+    border: "2px solid #000",
+    boxShadow: 24,
+    p: 4,
+  };
   return (
-    <BootstrapDialog
-      aria-labelledby="customized-dialog-title"
-      open={open}
-      onClose={handleClose}
-    >
-      <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
-        <Box mb={2}>
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              // background: "green",
-            }}
-          >
-            <Box>
-              <TextField
-                label="Title"
-                fullWidth
-                variant="outlined"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-              />
-            </Box>
-          </Box>
+    // <BootstrapDialog
+    //   aria-labelledby="customized-dialog-title"
+    //   open={open}
+    //   onClose={handleClose}
+    // >
+    //   <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
+    //     <Box mb={2}>
+    //       <Box
+    //         sx={{
+    //           display: "flex",
+    //           justifyContent: "space-between",
+    //           // background: "green",
+    //         }}
+    //       >
+    //         <Box>
+    //           <TextField
+    //             label="Title"
+    //             fullWidth
+    //             variant="outlined"
+    //             value={title}
+    //             onChange={(e) => setTitle(e.target.value)}
+    //           />
+    //         </Box>
+    //       </Box>
+    //     </Box>
+    //   </BootstrapDialogTitle>
+    //   <DialogContent dividers>
+    //     <TextareaAutosize
+    //       style={{ width: 560 }}
+    //       minRows={3}
+    //       value={note}
+    //       onChange={(e) => setNote(e.target.value)}
+    //     />
+    //   </DialogContent>
+    //   <DialogActions>
+    //     <Button autoFocus onClick={handleNoteSubmit}>
+    //       Save changes
+    //     </Button>
+    //   </DialogActions>
+    // </BootstrapDialog>
+    <div>
+      <Modal
+        keepMounted
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="keep-mounted-modal-title"
+        aria-describedby="keep-mounted-modal-description"
+      >
+        <Box sx={style}>
+          <Typography id="keep-mounted-modal-title" variant="h6" component="h2">
+            Text in a modal
+          </Typography>
+          <Typography id="keep-mounted-modal-description" sx={{ mt: 2 }}>
+            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+          </Typography>
         </Box>
-      </BootstrapDialogTitle>
-      <DialogContent dividers>
-        <TextareaAutosize
-          style={{ width: 560 }}
-          minRows={3}
-          value={note}
-          onChange={(e) => setNote(e.target.value)}
-        />
-      </DialogContent>
-      <DialogActions>
-        <Button autoFocus onClick={handleNoteSubmit}>
-          Save changes
-        </Button>
-      </DialogActions>
-    </BootstrapDialog>
+      </Modal>
+    </div>
   );
 };
 export default NoteViewer;

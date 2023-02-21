@@ -28,7 +28,7 @@ const NoteList: FC<Props> = ({ notes, searchText, onDelete, onClick }) => {
     >
       {filteredNotes?.map((note) => (
         <MenuItem
-          sx={{ background: "green", margin: 2 }}
+          sx={{ background: "#546e7a", margin: 2 }}
           onClick={() => onClick?.(note)}
         >
           <Note key={note.id} note={note} onDelete={onDelete} />

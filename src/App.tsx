@@ -8,6 +8,7 @@ function App() {
       sx={{
         maxWidth: "1650px",
         margin: "auto",
+        height: "100vh",
         background: "#8888",
         boxShadow: "0px 0px 44px 0px rgba(0, 0, 0, 0.55)",
       }}

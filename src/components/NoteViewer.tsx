@@ -157,12 +157,21 @@ const NoteViewer = ({
         aria-describedby="keep-mounted-modal-description"
       >
         <Box sx={style}>
-          <Typography id="keep-mounted-modal-title" variant="h6" component="h2">
-            Text in a modal
-          </Typography>
-          <Typography id="keep-mounted-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </Typography>
+          <Box>
+            <TextField
+              label="Title"
+              fullWidth
+              variant="standard"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
+            <TextareaAutosize
+              style={{ width: 890 }}
+              minRows={53}
+              value={note}
+              onChange={(e) => setNote(e.target.value)}
+            />
+          </Box>
         </Box>
       </Modal>
     </div>

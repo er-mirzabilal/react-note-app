@@ -20,18 +20,16 @@ const NoteList: FC<Props> = ({ notes, searchText, onDelete, onClick }) => {
   );
 
   return (
-    <Box
-      sx={{
-        boxShadow: "0px 0px 4px 0px rgba(0, 0, 0, 0.55)",
-        borderRadius: "10px",
-      }}
-    >
+    <>
       {filteredNotes?.map((note) => (
-        <Box sx={{ margin: 2 }} onClick={() => onClick?.(note)}>
+        <Box
+          sx={{  boxShadow: "0px 0px 4px 0px rgba(0, 0, 0, 0.55)" }}
+          onClick={() => onClick?.(note)}
+        >
           <Note key={note.id} note={note} onDelete={onDelete} />
         </Box>
       ))}
-    </Box>
+    </>
   );
 };
 

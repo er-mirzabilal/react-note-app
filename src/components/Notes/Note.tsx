@@ -16,7 +16,7 @@ const Note: FC<Props> = ({ note, onDelete }) => {
       sx={{
         display: "flex",
         justifyContent: "space-between",
-
+        p: 2,
         alignItems: "center",
       }}
     >
@@ -29,7 +29,6 @@ const Note: FC<Props> = ({ note, onDelete }) => {
             "&:hover": {
               background: "transparent",
               boxShadow: "none",
-
               opacity: 1,
             },
           }}

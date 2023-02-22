@@ -1,26 +1,30 @@
-import { palette } from '../palette';
+import { palette } from "../palette";
 export const MuiTextField = {
   styleOverrides: {
     root: {
-      '& label.Mui-focused': {
+      "& label.Mui-focused": {
         // color: 'rgba(243, 82, 63, 1)'
+        border: "none",
       },
 
-      '& .MuiOutlinedInput-root': {
-        '& fieldset': {
+      "& .MuiOutlinedInput-root": {
+        "& fieldset": {
           // borderColor: 'rgba(243, 82, 63, 1)'
+          border: "none",
         },
-        '&:hover fieldset': {
+        "&:hover fieldset": {
           // borderColor: 'rgba(243, 82, 63, 1)'
+          border: "none",
         },
-        '&.Mui-focused fieldset': {
+        "&.Mui-focused fieldset": {
           // borderColor: 'rgba(243, 82, 63, 1)',
-          outline: 'none',
+          border: "none",
+          outline: "none",
         },
-        'color': palette.text.darkBlack,
-        'fontSize': '22px',
-        'fontFamily': 'Inter',
-        'fontWeight': 700,
+        color: palette.text.darkBlack,
+        fontSize: "22px",
+        fontFamily: "Inter",
+        fontWeight: 700,
       },
     },
   },

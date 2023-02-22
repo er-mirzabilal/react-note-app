@@ -73,7 +73,7 @@ const NotesApp: FC = () => {
         margin: "auto",
         p: 2,
         width: "500px",
-        // background: "#455a64",
+
         color: "white",
         alignItems: "center",
         height: "96.4vh",
@@ -85,29 +85,40 @@ const NotesApp: FC = () => {
             Notes
           </Typography>
         </Box>
-        {/* <NewNote onAdd={handleAddNote} /> */}
+
         <Box
           mb={2}
           sx={{ mt: 2, display: "flex", justifyContent: "space-between" }}
         >
-          <TextField
-            type="text"
-            placeholder="Search"
-            value={searchText}
-            onChange={handleSearchTextChange}
-          />
+          <Box
+            sx={{
+              mt: 4,
+              display: "flex",
+              justifyContent: "space-between",
+              width: "100%",
+            }}
+          >
+            <TextField
+              sx={{
+                boxShadow: "0px 0px 10px 0px rgba(0, 0, 0, 0.55)",
+              }}
+              type="text"
+              placeholder="Search"
+              value={searchText}
+              onChange={handleSearchTextChange}
+            />
 
-          <Button variant="outlined" onClick={handleAddNote}>
-            <Add />
-          </Button>
-
-          <NoteViewer
-            open={open}
-            data={noteData}
-            handleSubmit={submitNote}
-            handleClose={() => setOpen(false)}
-          />
+            <Button variant="outlined" onClick={handleAddNote}>
+              <Add />
+            </Button>
+          </Box>
         </Box>
+        <NoteViewer
+          open={open}
+          data={noteData}
+          handleSubmit={submitNote}
+          handleClose={() => setOpen(false)}
+        />
         <NoteList
           notes={notes}
           searchText={searchText}

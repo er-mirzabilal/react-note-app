@@ -98,9 +98,11 @@ const NotesApp: FC = () => {
               width: "100%",
             }}
           >
+            
             <TextField
               sx={{
                 boxShadow: "0px 0px 10px 0px rgba(0, 0, 0, 0.55)",
+                width: '100%',
               }}
               type="text"
               placeholder="Search"

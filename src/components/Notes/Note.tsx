@@ -18,18 +18,19 @@ const Note: FC<Props> = ({ note, onDelete }) => {
         justifyContent: "space-between",
         p: 2,
         alignItems: "center",
+        cursor: 'pointer'
       }}
     >
-      <Typography variant="p-lg">{note.title}</Typography>
+      <Typography color={'black'} variant="p-lg">{note.title}</Typography>
       <IconButton aria-label="delete" onClick={(e) => onDelete(note.id, e)}>
         <Delete
           sx={{
-            color: "white",
+            color: "black",
             opacity: 0,
             "&:hover": {
               background: "transparent",
               boxShadow: "none",
-              opacity: 1,
+              opacity: 1, 
             },
           }}
         />

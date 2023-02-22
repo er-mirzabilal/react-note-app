@@ -10,7 +10,7 @@ import Note from "./Note";
 interface Props {
   notes: NoteType[];
   searchText: string;
-  onDelete: (id: string) => void;
+  onDelete: (id: string, e: any) => void;
   onClick?: (data: NoteType) => void;
 }
 

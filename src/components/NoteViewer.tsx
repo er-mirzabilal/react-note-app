@@ -167,10 +167,13 @@ const NoteViewer = ({
             />
             <TextareaAutosize
               style={{ width: 890 }}
-              minRows={53}
+              minRows={30}
               value={note}
               onChange={(e) => setNote(e.target.value)}
             />
+              <Button autoFocus onClick={handleNoteSubmit}>
+               Save changes
+         </Button>
           </Box>
         </Box>
       </Modal>

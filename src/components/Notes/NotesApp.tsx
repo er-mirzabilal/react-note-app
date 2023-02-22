@@ -16,7 +16,6 @@ import { INITIAL_NOTE } from "../../utiles/constants";
 
 const NotesApp: FC = () => {
   const dispatch = useDispatch();
-  // const notes = useSelector((state: RootState) => state.notes.notes);
   const [notes, setNotes] = useState<NoteType[]>([]);
   const searchText = useSelector((state: RootState) => state.notes.searchText);
   const [open, setOpen] = useState(false);
@@ -29,8 +28,10 @@ const NotesApp: FC = () => {
     setEditMode(false);
   };
 
-  const handleDeleteNote = (id: string) => {
-    dispatch(deleteNote(id));
+  const handleDeleteNote = (id: string, e: any) => {
+    e.stopPropagation();
+      const updatedNotes = notes.filter((note) =>  note.id !== id);
+      setNotes(updatedNotes);
   };
 
   const handleSearchTextChange = (
@@ -42,6 +43,8 @@ const NotesApp: FC = () => {
   useEffect(() => {
     setNotes(data);
   }, []);
+
+
   const submitNote = (data: NoteType) => {
     if (editMode) {
       const index = notes.findIndex((note) => note.id === data.id);
@@ -59,6 +62,7 @@ const NotesApp: FC = () => {
     setOpen(false);
     setNoteData(INITIAL_NOTE);
   };
+
   const handleUpdateNote = (data: NoteType) => {
     setNoteData(data);
     setOpen(true);

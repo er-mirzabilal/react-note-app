@@ -30,8 +30,8 @@ const NotesApp: FC = () => {
 
   const handleDeleteNote = (id: string, e: any) => {
     e.stopPropagation();
-      const updatedNotes = notes.filter((note) =>  note.id !== id);
-      setNotes(updatedNotes);
+    const updatedNotes = notes.filter((note) => note.id !== id);
+    setNotes(updatedNotes);
   };
 
   const handleSearchTextChange = (
@@ -43,7 +43,6 @@ const NotesApp: FC = () => {
   useEffect(() => {
     setNotes(data);
   }, []);
-
 
   const submitNote = (data: NoteType) => {
     if (editMode) {
@@ -71,9 +70,10 @@ const NotesApp: FC = () => {
   return (
     <Box
       sx={{
+        margin: "auto",
         p: 2,
-        width: "300px",
-        background: "#455a64",
+        width: "500px",
+        // background: "#455a64",
         color: "white",
         alignItems: "center",
         height: "96.4vh",

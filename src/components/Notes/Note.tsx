@@ -10,12 +10,30 @@ interface Props {
 }
 
 const Note: FC<Props> = ({ note, onDelete }) => {
-
   return (
-    <Box mb={2} sx={{ display: "flex", justifyContent: "space-between", p: 2 }}>
+    <Box
+      mb={2}
+      sx={{
+        display: "flex",
+        justifyContent: "space-between",
+
+        alignItems: "center",
+      }}
+    >
       <Typography variant="p-lg">{note.title}</Typography>
       <IconButton aria-label="delete" onClick={(e) => onDelete(note.id, e)}>
-        <Delete />
+        <Delete
+          sx={{
+            color: "white",
+            opacity: 0,
+            "&:hover": {
+              background: "transparent",
+              boxShadow: "none",
+
+              opacity: 1,
+            },
+          }}
+        />
       </IconButton>
     </Box>
   );

@@ -18,7 +18,7 @@ export const MuiTextField = {
           outline: 'none',
         },
         'color': palette.text.darkBlack,
-        'fontSize': '14px',
+        'fontSize': '22px',
         'fontFamily': 'Inter',
         'fontWeight': 700,
       },

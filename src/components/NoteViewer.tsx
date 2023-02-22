@@ -21,11 +21,9 @@ import { noteValidation } from "../utiles/validation";
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
     padding: theme.spacing(2),
-    background: "red",
   },
   "& .MuiDialogActions-root": {
     padding: theme.spacing(1),
-    background: "green      ",
   },
 }));
 
@@ -98,12 +96,12 @@ const NoteViewer = ({
   const style = {
     position: "absolute" as "absolute",
     top: "50%",
-    left: "50%",
+    left: "70%",
     transform: "translate(-50%, -50%)",
-    width: 900,
-    height: 860,
-    bgcolor: "#90a4ae",
-    border: "2px solid #000",
+
+    bgcolor: "gray",
+    border: "none",
+
     boxShadow: 24,
     p: 4,
   };
@@ -158,22 +156,33 @@ const NoteViewer = ({
       >
         <Box sx={style}>
           <Box>
-            <TextField
-              label="Title"
-              fullWidth
-              variant="standard"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-            />
-            <TextareaAutosize
-              style={{ width: 890 }}
-              minRows={30}
-              value={note}
-              onChange={(e) => setNote(e.target.value)}
-            />
-              <Button autoFocus onClick={handleNoteSubmit}>
-               Save changes
-         </Button>
+            <Box sx={{ marginBottom: "10px" }}>
+              <TextField
+                sx={{
+                  boxShadow: "0px 0px 10px 0px rgba(0, 0, 0, 0.55)",
+                  marginBottom: "10px",
+                }}
+                label="Title"
+                fullWidth
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+              />
+
+              <TextareaAutosize
+                style={{
+                  width: "100%",
+                  background: "transparent",
+                  border: "none",
+                }}
+                minRows={30}
+                placeholder="Note"
+                value={note}
+                onChange={(e) => setNote(e.target.value)}
+              />
+            </Box>
+            <Button variant="outlined" onClick={handleNoteSubmit}>
+              Save changes
+            </Button>
           </Box>
         </Box>
       </Modal>

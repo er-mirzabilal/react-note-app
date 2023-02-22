@@ -1,10 +1,10 @@
 import * as React from "react";
 import Button from "@mui/material/Button";
 import { Box } from "@mui/system";
-import { Modal, TextareaAutosize, TextField } from "@mui/material";
+import { IconButton, Modal, TextareaAutosize, TextField } from "@mui/material";
 import { NoteType } from "../utiles/types";
 import { noteValidation } from "../utiles/validation";
-import { Delete } from "@mui/icons-material";
+import { Close, Delete } from "@mui/icons-material";
 
 interface NoteViewerType {
   data: NoteType;
@@ -66,11 +66,20 @@ const NoteViewer = ({
       >
         <Box sx={style}>
           <Box
-            sx={{ display: "flex", justifyContent: "end", paddingBottom: 3 }}
+            sx={{
+              display: "flex",
+              justifyContent: "end",
+              paddingBottom: 3,
+              marginTop: 2,
+            }}
           >
-            <Button variant="nft_common" onClick={handleClose}>
-              <Delete />
-            </Button>
+            <IconButton aria-label="delete" onClick={handleClose}>
+              <Close
+                sx={{
+                  color: "white",
+                }}
+              />
+            </IconButton>
           </Box>
           <Box>
             <Box sx={{ marginBottom: "10px" }}>

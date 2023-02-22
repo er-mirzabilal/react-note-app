@@ -1,11 +1,13 @@
 import * as React from "react";
 import Button from "@mui/material/Button";
 import { Box } from "@mui/system";
-import { IconButton, Modal, TextareaAutosize, TextField } from "@mui/material";
+import { Alert, IconButton, Modal, Snackbar, TextField } from "@mui/material";
 import { NoteType } from "../utiles/types";
 import { noteValidation } from "../utiles/validation";
 import { Close, Delete } from "@mui/icons-material";
+import { toast } from "react-toastify";
 
+import "react-toastify/dist/ReactToastify.css";
 interface NoteViewerType {
   data: NoteType;
   open: boolean;
@@ -35,13 +37,15 @@ const NoteViewer = ({
     };
     noteValidation(updatedData)
       .then(() => {
-        console.log(updatedData, "sucess");
         handleSubmit(updatedData);
       })
+
       .catch((err) => {
         console.log(err);
+        toast.error(err.note);
       });
   };
+
   const style = {
     position: "absolute" as "absolute",
     top: "50%",
@@ -50,7 +54,7 @@ const NoteViewer = ({
 
     bgcolor: "gray",
     border: "none",
-
+    height: "600px",
     boxShadow: 24,
     paddingX: 4,
     paddingBottom: 4,
@@ -82,13 +86,15 @@ const NoteViewer = ({
             </IconButton>
           </Box>
           <Box>
-            <Box sx={{ marginBottom: "10px" }}>
+            <Box sx={{ marginBottom: "10px", height: "480px" }}>
               <TextField
                 sx={{
-                  boxShadow: "0px 0px 10px 0px rgba(0, 0, 0, 0.55)",
                   marginBottom: "10px",
+                  borderBottom: "1px dotted gray",
                 }}
+                variant="outlined"
                 fullWidth
+                placeholder="New Note..."
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
               />

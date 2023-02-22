@@ -4,6 +4,7 @@ import { Box } from "@mui/system";
 import { Modal, TextareaAutosize, TextField } from "@mui/material";
 import { NoteType } from "../utiles/types";
 import { noteValidation } from "../utiles/validation";
+import { Delete } from "@mui/icons-material";
 
 interface NoteViewerType {
   data: NoteType;
@@ -51,7 +52,8 @@ const NoteViewer = ({
     border: "none",
 
     boxShadow: 24,
-    p: 4,
+    paddingX: 4,
+    paddingBottom: 4,
   };
   return (
     <div>
@@ -63,6 +65,13 @@ const NoteViewer = ({
         aria-describedby="keep-mounted-modal-description"
       >
         <Box sx={style}>
+          <Box
+            sx={{ display: "flex", justifyContent: "end", paddingBottom: 3 }}
+          >
+            <Button variant="nft_common" onClick={handleClose}>
+              <Delete />
+            </Button>
+          </Box>
           <Box>
             <Box sx={{ marginBottom: "10px" }}>
               <TextField

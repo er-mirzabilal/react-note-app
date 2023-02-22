@@ -32,7 +32,7 @@ export const MuiButton = {
       'alignItems': 'center',
       'maxWidth': '220px',
       'height': '50px',
-      'background': palette.primary.fire,
+      'background': palette.primary.lightBlack,
       'boxShadow': 'inset rgba(0, 0, 0, 0.25) 0px -1px 0px',
       'borderRadius': '0px',
       'textTransform': 'initial',

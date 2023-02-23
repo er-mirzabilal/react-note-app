@@ -1,13 +1,20 @@
 import * as React from "react";
 import Button from "@mui/material/Button";
 import { Box } from "@mui/system";
-import { Alert, IconButton, Modal, Snackbar, TextField } from "@mui/material";
-import { NoteType } from "../utiles/types";
-import { noteValidation } from "../utiles/validation";
-import { Close, Delete } from "@mui/icons-material";
+import { IconButton, Modal, TextField } from "@mui/material";
+import { NoteType } from "../../utiles/types";
+import { noteValidation } from "../../utiles/validation";
+import { Close } from "@mui/icons-material";
 import { toast } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
+import {
+  noteViewerDelete,
+  noteViewerMain,
+  noteViewerSaveButton,
+  noteViewerTextfield,
+  noteViewerTextfieldMain,
+} from "./NoteViewerStyle";
 interface NoteViewerType {
   data: NoteType;
   open: boolean;
@@ -46,19 +53,6 @@ const NoteViewer = ({
       });
   };
 
-  const style = {
-    position: "absolute" as "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-
-    bgcolor: "gray",
-    border: "none",
-    height: "600px",
-    boxShadow: 24,
-    paddingX: 4,
-    paddingBottom: 4,
-  };
   return (
     <div>
       <Modal
@@ -68,30 +62,16 @@ const NoteViewer = ({
         aria-labelledby="keep-mounted-modal-title"
         aria-describedby="keep-mounted-modal-description"
       >
-        <Box sx={style}>
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "end",
-              paddingBottom: 3,
-              marginTop: 2,
-            }}
-          >
+        <Box sx={noteViewerMain}>
+          <Box sx={noteViewerDelete}>
             <IconButton aria-label="delete" onClick={handleClose}>
-              <Close
-                sx={{
-                  color: "white",
-                }}
-              />
+              <Close color="info" />
             </IconButton>
           </Box>
           <Box>
-            <Box sx={{ marginBottom: "10px", height: "480px" }}>
+            <Box sx={noteViewerTextfieldMain}>
               <TextField
-                sx={{
-                  marginBottom: "10px",
-                  borderBottom: "1px dotted gray",
-                }}
+                sx={noteViewerTextfield}
                 variant="outlined"
                 fullWidth
                 placeholder="New Note..."
@@ -100,7 +80,6 @@ const NoteViewer = ({
               />
 
               <TextField
-                style={{ textAlign: "left", border: "none" }}
                 multiline
                 fullWidth
                 placeholder="Note"
@@ -108,7 +87,7 @@ const NoteViewer = ({
                 onChange={(e) => setNote(e.target.value)}
               />
             </Box>
-            <Box sx={{ display: "flex", justifyContent: "end" }}>
+            <Box sx={noteViewerSaveButton}>
               <Button variant="outlined" onClick={handleNoteSubmit}>
                 Save changes
               </Button>

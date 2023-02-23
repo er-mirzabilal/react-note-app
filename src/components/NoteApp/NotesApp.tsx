@@ -1,18 +1,20 @@
 import { FC, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux";
-import { addNote, deleteNote, setSearchText } from "../../redux/noteSlice";
+import { setSearchText } from "../../redux/noteSlice";
 
-import NoteList from "./NoteList";
-import NewNote from "./DeleteMe";
-import { Box, Button, Container, TextField, Typography } from "@mui/material";
-import AddNotes from "../NoteViewer";
+import NoteList from "../NoteList/NoteList";
+import { Box, Button, TextField, Typography } from "@mui/material";
 import { data } from "../../data/notes";
 import { Add } from "@mui/icons-material";
-import { generateId } from "../../utiles/common";
 import { NoteType } from "../../utiles/types";
-import NoteViewer from "../NoteViewer";
+import NoteViewer from "../NoteViewer/NoteViewer";
 import { INITIAL_NOTE } from "../../utiles/constants";
+import {
+  noteAppMain,
+  noteAppSearchMain,
+  noteAppTextfield,
+} from "./NoteAppStyle";
 
 const NotesApp: FC = () => {
   const dispatch = useDispatch();
@@ -68,17 +70,7 @@ const NotesApp: FC = () => {
     setEditMode(true);
   };
   return (
-    <Box
-      sx={{
-        margin: "auto",
-        p: 2,
-        width: "500px",
-
-        color: "white",
-        alignItems: "center",
-        height: "96.4vh",
-      }}
-    >
+    <Box sx={noteAppMain}>
       <>
         <Box mt={4} mb={2}>
           <Typography variant="h4" align="center">
@@ -86,33 +78,20 @@ const NotesApp: FC = () => {
           </Typography>
         </Box>
 
-        <Box
-          mb={2}
-          sx={{ mt: 2, display: "flex", justifyContent: "space-between" }}
-        >
-          <Box
-            sx={{
-              mt: 4,
-              display: "flex",
-              justifyContent: "space-between",
-              width: "100%",
-            }}
-          >
-            <TextField
-              sx={{
-                boxShadow: "0px 0px 10px 0px rgba(0, 0, 0, 0.55)",
-              }}
-              type="text"
-              placeholder="Search"
-              value={searchText}
-              onChange={handleSearchTextChange}
-            />
+        <Box mb={2} sx={noteAppSearchMain}>
+          <TextField
+            sx={noteAppTextfield}
+            type="text"
+            placeholder="Search"
+            value={searchText}
+            onChange={handleSearchTextChange}
+          />
 
-            <Button variant="outlined" onClick={handleAddNote}>
-              <Add />
-            </Button>
-          </Box>
+          <Button variant="contained" onClick={handleAddNote}>
+            <Add />
+          </Button>
         </Box>
+
         <NoteViewer
           open={open}
           data={noteData}

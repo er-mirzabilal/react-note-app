@@ -1,12 +1,7 @@
-import { Box, MenuItem } from "@mui/material";
+import { Box } from "@mui/material";
 import { FC } from "react";
-
 import { NoteType } from "../../utiles/types";
-
-// import { Note as NoteType } from "../../redux/noteSlice";
-
-import Note from "./Note";
-
+import Note from "../Notes/Note";
 interface Props {
   notes: NoteType[];
   searchText: string;
@@ -22,10 +17,7 @@ const NoteList: FC<Props> = ({ notes, searchText, onDelete, onClick }) => {
   return (
     <>
       {filteredNotes?.map((note) => (
-        <Box
-          sx={{  boxShadow: "0px 0px 4px 0px rgba(0, 0, 0, 0.55)" }}
-          onClick={() => onClick?.(note)}
-        >
+        <Box boxShadow={4} onClick={() => onClick?.(note)}>
           <Note key={note.id} note={note} onDelete={onDelete} />
         </Box>
       ))}

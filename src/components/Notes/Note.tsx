@@ -3,6 +3,7 @@ import { Box, IconButton, Typography } from "@mui/material";
 import { FC } from "react";
 
 import { NoteType } from "../../utiles/types";
+import { noteDelete, noteMain } from "./NoteStyle";
 
 interface Props {
   note: NoteType;
@@ -11,28 +12,10 @@ interface Props {
 
 const Note: FC<Props> = ({ note, onDelete }) => {
   return (
-    <Box
-      mb={2}
-      sx={{
-        display: "flex",
-        justifyContent: "space-between",
-        p: 2,
-        alignItems: "center",
-      }}
-    >
+    <Box mb={2} sx={noteMain}>
       <Typography variant="p-lg">{note.title}</Typography>
       <IconButton aria-label="delete" onClick={(e) => onDelete(note.id, e)}>
-        <Delete
-          sx={{
-            color: "white",
-            opacity: 0,
-            "&:hover": {
-              background: "transparent",
-              boxShadow: "none",
-              opacity: 1,
-            },
-          }}
-        />
+        <Delete sx={noteDelete} />
       </IconButton>
     </Box>
   );

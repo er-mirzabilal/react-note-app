@@ -1,7 +1,6 @@
-declare module '@mui/material/Button' {
+declare module "@mui/material/Button" {
   interface ButtonPropsVariantOverrides {
-    nft_common: true;
+    newButton: true;
   }
 }
-
 export {};

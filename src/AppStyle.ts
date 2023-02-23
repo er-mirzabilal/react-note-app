@@ -3,5 +3,5 @@ export const appMainBox = {
   margin: "auto",
   height: "100vh",
   background: "gray",
-  boxShadow: "20",
+  boxShadow: 24,
 };

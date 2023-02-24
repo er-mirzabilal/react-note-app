@@ -15,6 +15,7 @@ import {
   noteViewerTextfield,
   noteViewerTextfieldMain,
 } from "./NoteViewerStyle";
+import useNotes from "../../utiles/useNote";
 interface NoteViewerType {
   data: NoteType;
   open: boolean;
@@ -29,6 +30,8 @@ const NoteViewer = ({
 }: NoteViewerType) => {
   const [title, setTitle] = React.useState(data.title);
   const [note, setNote] = React.useState(data.note);
+  const { open: open2 } = useNotes();
+  console.log(open2, "open2", open, "open");
 
   React.useEffect(() => {
     setTitle(data.title);

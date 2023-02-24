@@ -1,74 +1,28 @@
-import { FC, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../redux";
-import { setSearchText } from "../../redux/noteSlice";
+import { FC, useState } from "react";
+import { Box, Button, TextField, Typography } from "@mui/material";
+import { Add } from "@mui/icons-material";
 
 import NoteList from "../NoteList/NoteList";
-import { Box, Button, TextField, Typography } from "@mui/material";
-import { data } from "../../data/notes";
-import { Add } from "@mui/icons-material";
-import { NoteType } from "../../utiles/types";
 import NoteViewer from "../NoteViewer/NoteViewer";
-import { INITIAL_NOTE } from "../../utiles/constants";
 import {
   noteAppMain,
   noteAppSearchMain,
   noteAppTextfield,
 } from "./NoteAppStyle";
-
-const NotesApp: FC = () => {
-  const dispatch = useDispatch();
-  const [notes, setNotes] = useState<NoteType[]>([]);
-  const searchText = useSelector((state: RootState) => state.notes.searchText);
-  const [open, setOpen] = useState(false);
-  const [editMode, setEditMode] = useState<boolean>(false);
-  const [noteData, setNoteData] = useState<NoteType>(INITIAL_NOTE);
-
-  const handleAddNote = () => {
-    setNoteData(INITIAL_NOTE);
-    setOpen(true);
-    setEditMode(false);
-  };
-
-  const handleDeleteNote = (id: string, e: any) => {
-    e.stopPropagation();
-    const updatedNotes = notes.filter((note) => note.id !== id);
-    setNotes(updatedNotes);
-  };
-
-  const handleSearchTextChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    dispatch(setSearchText(event.target.value));
-  };
-
-  useEffect(() => {
-    setNotes(data);
-  }, []);
-
-  const submitNote = (data: NoteType) => {
-    if (editMode) {
-      const index = notes.findIndex((note) => note.id === data.id);
-      console.log(index);
-      const updatedNotes = [...notes];
-      updatedNotes.splice(index, 1, data);
-      console.log("up", updatedNotes);
-      setNotes(updatedNotes);
-    } else {
-      const updateNotes = [...notes];
-      updateNotes.push(data);
-      console.log(data, updateNotes);
-      setNotes(updateNotes);
-    }
-    setOpen(false);
-    setNoteData(INITIAL_NOTE);
-  };
-
-  const handleUpdateNote = (data: NoteType) => {
-    setNoteData(data);
-    setOpen(true);
-    setEditMode(true);
-  };
+import useNotes from "../../utiles/useNote";
+import useSearchText from "../../utiles/useSearch";
+const NoteApp: FC = () => {
+  const {
+    notes,
+    handleAddNote,
+    handleDeleteNote,
+    submitNote,
+    handleUpdateNote,
+    noteData,
+    setOpen,
+    open,
+  } = useNotes();
+  const { searchText, handleSearchTextChange } = useSearchText();
   return (
     <Box sx={noteAppMain}>
       <>
@@ -108,5 +62,4 @@ const NotesApp: FC = () => {
     </Box>
   );
 };
-
-export default NotesApp;
+export default NoteApp;
